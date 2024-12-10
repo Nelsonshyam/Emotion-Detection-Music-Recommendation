@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Mood-Based Music Recommendation</title>
+</head>
+<body>
+    <h1>Mood-Based Music Recommendation</h1>
+
+    <h2>Upload Image or Use Video Capture</h2>
+    <form method="post" enctype="multipart/form-data">
+        <label>Number of Songs:</label>
+        <input type="number" name="songs_count" min="1" value="5" required>
+        <br><br>
+        <label>Upload an Image:</label>
+        <input type="file" name="image" accept="image/*">
+        <br><br>
+        <button type="submit">Submit</button>
+        <button type="reset" onclick="window.location.href='/'">Reset</button>
+    </form>
+    <br>
+    <form method="post">
+        <button type="submit">Start Video Capture</button>
+    </form>
+
+    {% if emotion and mood %}
+    <hr>
+    <h2>Results</h2>
+    <p><strong>Detected Emotion:</strong> {{ emotion }}</p>
+    <p><strong>Mapped Mood:</strong> {{ mood }}</p>
+    <h3>Top {{ songs_count }} Recommended Songs</h3>
+    <ul>
+        {% for song, artist in songs_list %}
+        <li>{{ song }} by {{ artist }}</li>
+        {% endfor %}
+    </ul>
+    <form method="get">
+        <button type="submit">Reset</button>
+    </form>
+    {% endif %}
+</body>
+</html>
